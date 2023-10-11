@@ -12,18 +12,25 @@ import Combine
 
 struct ImmersiveView: View {
     var body: some View {
-        RealityView { content in
-            let rootEntity = Entity()
-            rootEntity.addSkybox()
-            content.add(rootEntity)
+        ZStack {
+            RealityView { content in
+                let rootEntity = Entity()
+                rootEntity.addSkybox(for: "beach_scene", radius: 1e3)
+                content.add(rootEntity)
+            }
+            RealityView { content in
+                let rootEntity = Entity()
+                rootEntity.addSkybox(for: "lake_scene", radius: 1e2)
+                content.add(rootEntity)
+            }
         }
     }
 }
 
 
 extension Entity {
-    func addSkybox() {
-        let subscription = TextureResource.loadAsync(named: "beach_scene").sink(
+    func addSkybox(for fileName: String, radius: Float) {
+        let subscription = TextureResource.loadAsync(named: fileName).sink(
             receiveCompletion: {
                 switch $0 {
                 case .finished: break
@@ -35,7 +42,7 @@ extension Entity {
                 var material = UnlitMaterial()
                 material.color = .init(texture: .init(texture))
                 self.components.set(ModelComponent(
-                    mesh: .generateSphere(radius: 1E3), // 1E3
+                    mesh: .generateSphere(radius: radius), // 1E3
 //                    mesh: .generateCylinder(height: 10, radius: 5),
                     materials: [material]
                 ))
@@ -50,8 +57,8 @@ extension Entity {
         components.set(Entity.SubscriptionComponent(subscription: subscription))
     }
     
-    func updateTexture() {
-        let subscription = TextureResource.loadAsync(named: "beach_scene").sink(
+    func updateTexture(for fileName: String) {
+        let subscription = TextureResource.loadAsync(named: fileName).sink(
             receiveCompletion: {
                 switch $0 {
                     case .finished: break
