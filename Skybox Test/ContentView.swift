@@ -22,9 +22,12 @@ struct ContentView: View {
         VStack {
             RealityView { content in
                 // Add the initial RealityKit content
-                if let scene = try? await Entity(named: "Scene", in: realityKitContentBundle) {
-                    content.add(scene)
+                if let earthScene = try? await Entity(named: "Earth") {
+                    content.add(earthScene)
                 }
+//                if let scene = try? await Entity(named: "Scene", in: realityKitContentBundle) {
+//                    content.add(scene)
+//                }
             } update: { content in
                 // Update the RealityKit content when SwiftUI state changes
                 if let scene = content.entities.first {

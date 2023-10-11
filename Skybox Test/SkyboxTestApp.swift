@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct SkyBoxTest: App {
+struct SkyboxTestApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -16,6 +16,6 @@ struct SkyBoxTest: App {
 
         ImmersiveSpace(id: "ImmersiveSpace") {
             ImmersiveView()
-        }.immersionStyle(selection: .constant(.progressive), in: .progressive)
+        }.immersionStyle(selection: .constant(.full), in: .full)
     }
 }
