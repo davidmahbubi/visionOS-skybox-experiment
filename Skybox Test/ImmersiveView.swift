@@ -36,6 +36,12 @@ struct ImmersiveView: View {
                 rootEntity.addSkybox(for: "beach_scene", radius: 20)
                 rootEntity.updateRotation(rotation: 55)
                 content.add(rootEntity)
+            } update: { content in
+                if let scene = content.entities.first {
+                    print("rotation: \(rotation)")
+                    let degree = Angle.degrees(rotation)
+                    scene.transform.rotation = simd_quatf(angle: Float(degree.radians), axis: SIMD3<Float>(0, 1, 0))
+                }
             }
             RealityView { content in
                 let rootEntity = Entity()
@@ -44,9 +50,11 @@ struct ImmersiveView: View {
             }
         }
         .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-//                rotation += 1000
-//                lakeEntity.updateRotation(rotation: rotation)
+            Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
+                if (rotation >= 360) {
+                    rotation = 0
+                }
+                rotation += 0.2
             }
         }
     }
@@ -113,7 +121,7 @@ extension Entity {
         // Rotate the immersive space around the Y-axis set the user's
         // initial view of the immersive scene.
         let angle = Angle.degrees(rotation)
-//        print("Updating to \(angle.radians)")
+        print("Updating to \(angle.radians)")
 //        let rotation = simd_quatf(angle: Float(angle.radians), axis: SIMD3<Float>(0, 1, 0))
         let rotation = simd_quatf(angle: Float(angle.radians), axis: SIMD3<Float>(0, 1, 0))
         self.transform.rotation = rotation
