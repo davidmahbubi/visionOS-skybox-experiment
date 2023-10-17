@@ -18,14 +18,12 @@ struct ImmersiveView: View {
     @State var rotation: Double = 0
     
     init() {
-//        self.rotation = 55
-        
         beachEntity = Entity()
         beachEntity.addSkybox(for: "beach_scene", radius: 20)
         beachEntity.updateRotation(rotation: 55)
         
         lakeEntity = Entity()
-        lakeEntity.addSkybox(for: "lake_scene", radius: 30)
+        lakeEntity.addSkybox(for: "cloud", radius: 30)
         lakeEntity.updateRotation(rotation: 55)
     }
     
@@ -33,21 +31,21 @@ struct ImmersiveView: View {
         ZStack {
             RealityView { content in
                 let rootEntity = Entity()
-                rootEntity.addSkybox(for: "beach_scene", radius: 20)
-                rootEntity.updateRotation(rotation: 55)
-                content.add(rootEntity)
-            } update: { content in
-                if let scene = content.entities.first {
-                    print("rotation: \(rotation)")
-                    let degree = Angle.degrees(rotation)
-                    scene.transform.rotation = simd_quatf(angle: Float(degree.radians), axis: SIMD3<Float>(0, 1, 0))
-                }
-            }
-            RealityView { content in
-                let rootEntity = Entity()
-                rootEntity.addSkybox(for: "lake_scene", radius: 10)
-                content.add(rootEntity)
-            }
+                rootEntity.addSkybox(for: "cloud", radius: 20)
+                //                rootEntity.updateRotation(rotation: 55)
+                content.add(rootEntity) }
+//            } update: { content in
+//                if let scene = content.entities.first {
+//                    print("rotation: \(rotation)")
+//                    let degree = Angle.degrees(rotation)
+//                    scene.transform.rotation = simd_quatf(angle: Float(degree.radians), axis: SIMD3<Float>(0, 1, 0))
+//                }
+//            }
+//            RealityView { content in
+//                let rootEntity = Entity()
+//                rootEntity.addSkybox(for: "lake_scene", radius: 10)
+//                content.add(rootEntity)
+//            }wd
         }
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
@@ -66,8 +64,8 @@ extension Entity {
         let subscription = TextureResource.loadAsync(named: fileName).sink(
             receiveCompletion: {
                 switch $0 {
-                case .finished: break
-                case .failure(let error): assertionFailure("\(error)")
+                    case .finished: break
+                    case .failure(let error): assertionFailure("\(error)")
                 }
             },
             receiveValue: { [weak self] texture in
@@ -76,8 +74,9 @@ extension Entity {
                 material.color = .init(texture: .init(texture))
                 self.components.set(ModelComponent(
                     mesh: .generateSphere(radius: radius), // 1E3
+//                    mesh: .generateBox(width: 15, height: 15, depth: 15, splitFaces: true),
 //                    mesh: .generateCylinder(height: 10, radius: 5),
-                    materials: [material]
+                    materials: [material, material, material, material, material, material]
                 ))
                 self.scale *= .init(x: -1, y: 1, z: 1)
 //                self.position.y = 5

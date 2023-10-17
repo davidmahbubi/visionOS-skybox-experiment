@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C060AF682ADE760D00526253 /* Sun.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C060AF672ADE760D00526253 /* Sun.usdz */; };
+		C060AF6A2ADE78E100526253 /* Surface.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C060AF692ADE78E100526253 /* Surface.usdz */; };
 		C0704E2B2AD682D200C88461 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = C0704E2A2AD682D200C88461 /* RealityKitContent */; };
 		C0704E2D2AD682D200C88461 /* SkyboxTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0704E2C2AD682D200C88461 /* SkyboxTestApp.swift */; };
 		C0704E2F2AD682D200C88461 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0704E2E2AD682D200C88461 /* ContentView.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C060AF672ADE760D00526253 /* Sun.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sun.usdz; sourceTree = "<group>"; };
+		C060AF692ADE78E100526253 /* Surface.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Surface.usdz; sourceTree = "<group>"; };
 		C0704E252AD682D200C88461 /* Skybox Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Skybox Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0704E292AD682D200C88461 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		C0704E2C2AD682D200C88461 /* SkyboxTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyboxTestApp.swift; sourceTree = "<group>"; };
@@ -62,7 +66,9 @@
 		C0704E272AD682D200C88461 /* Skybox Test */ = {
 			isa = PBXGroup;
 			children = (
+				C060AF672ADE760D00526253 /* Sun.usdz */,
 				C0704E412AD6878F00C88461 /* Earth.usdz */,
+				C060AF692ADE78E100526253 /* Surface.usdz */,
 				C0704E2C2AD682D200C88461 /* SkyboxTestApp.swift */,
 				C0704E2E2AD682D200C88461 /* ContentView.swift */,
 				C0704E302AD682D200C88461 /* ImmersiveView.swift */,
@@ -151,6 +157,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C060AF682ADE760D00526253 /* Sun.usdz in Resources */,
+				C060AF6A2ADE78E100526253 /* Surface.usdz in Resources */,
 				C0704E422AD6878F00C88461 /* Earth.usdz in Resources */,
 				C0704E352AD682D400C88461 /* Assets.xcassets in Resources */,
 				C0704E382AD682D400C88461 /* Preview Assets.xcassets in Resources */,

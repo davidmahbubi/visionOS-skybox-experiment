@@ -23,34 +23,37 @@ struct ContentView: View {
     var body: some View {
         VStack {
             RealityView { content in
-                if let earthScene = try? await Entity(named: "Earth") {
+                
+                if let earthScene = try? await Entity(named: "Sun") {
 //                    let degree = Angle.degrees(rotation)
 //                    earthScene.transform.rotation = simd_quatf(angle: Float(degree.radians), axis: SIMD3<Float>(1, 0, 0))
-                    content.add(earthScene)
+                    earthScene.generateCollisionShapes(recursive: true)
+//                    content.add(earthScene)
                 }
+                
+                if let surfaceScene = try? await Entity(named: "Surface") {
+                    surfaceScene.generateCollisionShapes(recursive: true)
+                    surfaceScene.position = SIMD3<Float>(x: 0, y: -0.5, z: 0)
+                    content.add(surfaceScene)
+                }
+                
             } update: { content in
                 // Update the RealityKit content when SwiftUI state changes
                 if let scene = content.entities.first {
-//                    let uniformScale: Float = enlarge ? 1.2 : 1.0
-                    print("rotation: \(rotation)")
                     let degree = Angle.degrees(rotation)
                     scene.transform.rotation = simd_quatf(angle: Float(degree.radians), axis: SIMD3<Float>(0, 1, 0))
-//                    scene.transform.scale = [uniformScale, uniformScale, uniformScale]
                 }
             }
             .gesture(TapGesture().targetedToAnyEntity().onEnded { _ in
                 enlarge.toggle()
             })
             VStack {
-                Toggle("Enlarge RealityView Content", isOn: $enlarge)
-                    .toggleStyle(.button)
-
                 Toggle("Show Immersive Space", isOn: $showImmersiveSpace)
                     .toggleStyle(.button)
             }.padding().glassBackgroundEffect()
         }
         .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
                 if (rotation > 360) {
                     rotation = 0
                 }

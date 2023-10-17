@@ -15,6 +15,11 @@ def Xform "Root"
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (-0.011827953, 0.10239734, 0.042265564)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "MotionState"
+        {
+            uniform token info:id = "RealityKit.MotionState"
+        }
     }
 }
 

@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "SaH2O_Illustrated_HDRI_sunny_R1_4K.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
